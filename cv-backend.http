@@ -1,6 +1,0 @@
-@localhost = http://localhost:5162
-
-GET {{localhost}}/something
-Accept: application/json
-
-###

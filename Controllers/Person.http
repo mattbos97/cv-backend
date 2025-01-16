@@ -1,0 +1,30 @@
+﻿GET {{baseUrl}}/api/Person
+Accept: application/json
+
+###
+
+POST {{baseUrl}}/api/Person
+Content-Type: application/json
+
+{
+  "FirstName": "Matt",
+  "LastName": "Bos",
+  "DateOfBirth": "1998-08-29"
+}
+
+###
+
+POST {{baseUrl}}/api/Person
+Content-Type: application/json
+
+{
+  "FirstName": "Olivia",
+  "LastName": "Miles",
+  "DateOfBirth": "2005-01-22"
+}
+
+###
+
+DELETE {{baseUrl}}/api/Person/3
+
+###
