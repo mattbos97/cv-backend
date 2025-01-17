@@ -1,4 +1,4 @@
-﻿using cv_backend.Models;
+using cv_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace cv_backend;
@@ -11,6 +11,8 @@ public class CVContext : DbContext
 
     public DbSet<Person> Persons { get; set; }
     public DbSet<WorkExperience> WorkExperiences { get; set; }
+    public DbSet<Skill> Skills { get; set; }
+    public DbSet<PersonSkill> PersonSkills { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,16 +34,16 @@ public class CVContext : DbContext
 
     private void DefinePersonSkillRelationship(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Person_Skill>()
+        modelBuilder.Entity<PersonSkill>()
             .HasKey(ps => new { ps.PersonId, ps.SkillId });
 
-        modelBuilder.Entity<Person_Skill>()
+        modelBuilder.Entity<PersonSkill>()
             .HasOne<Person>(ps => ps.Person)
             .WithMany(person => person.PersonSkills)
             .HasForeignKey(ps => ps.PersonId)
             .IsRequired();
 
-        modelBuilder.Entity<Person_Skill>()
+        modelBuilder.Entity<PersonSkill>()
             .HasOne<Skill>(ps => ps.Skill)
             .WithMany(skill => skill.PersonSkills)
             .HasForeignKey(ps => ps.SkillId)

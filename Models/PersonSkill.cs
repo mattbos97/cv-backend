@@ -1,6 +1,6 @@
 ﻿namespace cv_backend.Models;
 
-public class Person_Skill
+public class PersonSkill
 {
 
     public long PersonId { get; set; }
