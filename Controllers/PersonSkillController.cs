@@ -23,36 +23,36 @@ namespace cv_backend.Controllers
 
         // GET: api/PersonSkill
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Skill>>> GetPersonSkill()
+        public async Task<ActionResult<IEnumerable<PersonSkill>>> GetPersonSkills()
         {
-            return await _context.Skills.ToListAsync();
+            return await _context.PersonSkills.ToListAsync();
         }
 
         // GET: api/PersonSkill/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Skill>> GetPersonSkill(long id)
+        public async Task<ActionResult<PersonSkill>> GetPerson_Skill(long id)
         {
-            var skill = await _context.Skills.FindAsync(id);
+            var personSkill = await _context.PersonSkills.FindAsync(id);
 
-            if (skill == null)
+            if (personSkill == null)
             {
                 return NotFound();
             }
 
-            return skill;
+            return personSkill;
         }
 
         // PUT: api/PersonSkill/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonSkill(long id, Skill skill)
+        public async Task<IActionResult> PutPerson_Skill(long id, PersonSkill personSkill)
         {
-            if (id != skill.Id)
+            if (id != personSkill.PersonId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(skill).State = EntityState.Modified;
+            _context.Entry(personSkill).State = EntityState.Modified;
 
             try
             {
@@ -76,25 +76,39 @@ namespace cv_backend.Controllers
         // POST: api/PersonSkill
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Skill>> PostPersonSkill(Skill skill)
+        public async Task<ActionResult<PersonSkill>> PostPerson_Skill(PersonSkill personSkill)
         {
-            _context.Skills.Add(skill);
-            await _context.SaveChangesAsync();
+            _context.PersonSkills.Add(personSkill);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (PersonSkillExists(personSkill.PersonId))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return CreatedAtAction("GetPersonSkill", new { id = skill.Id }, skill);
+            return CreatedAtAction("GetPerson_Skill", new { id = personSkill.PersonId }, personSkill);
         }
 
         // DELETE: api/PersonSkill/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonSkill(long id)
+        public async Task<IActionResult> DeletePerson_Skill(long id)
         {
-            var skill = await _context.Skills.FindAsync(id);
-            if (skill == null)
+            var personSkill = await _context.PersonSkills.FindAsync(id);
+            if (personSkill == null)
             {
                 return NotFound();
             }
 
-            _context.Skills.Remove(skill);
+            _context.PersonSkills.Remove(personSkill);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +116,7 @@ namespace cv_backend.Controllers
 
         private bool PersonSkillExists(long id)
         {
-            return _context.Skills.Any(e => e.Id == id);
+            return _context.PersonSkills.Any(e => e.PersonId == id);
         }
     }
 }
