@@ -19,15 +19,8 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<CVContext>();
-    try
-    {
-        dbContext.Database.EnsureCreated();
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine(e.Message);
-        throw;
-    }
+    dbContext.Database.EnsureDeleted();
+    dbContext.Database.EnsureCreated();
 }
 
 // Configure the HTTP request pipeline.

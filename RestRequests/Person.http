@@ -1,0 +1,28 @@
+﻿POST {{baseUrl}}/api/Person
+Content-Type: application/json
+
+{
+  "FirstName": "Matt",
+  "LastName": "Bos",
+  "DateOfBirth": "1997-08-29",
+  "Bio": "Hello my name is..."
+}
+###
+
+POST {{baseUrl}}/api/WorkExperience
+Content-Type: application/json
+
+{
+  "JobTitle": ".NET Developer",
+  "CompanyName": "Prodrive technologies",
+  "StartDate": "2021-02-01",
+  "EndDate": "2024-12-01",
+  "JobDescription": "At prodrive I did...",
+  "PersonId": 1
+}
+###
+
+GET {{baseUrl}}/api/Person
+Accept: application/json
+###
+

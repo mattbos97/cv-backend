@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace cv_backend.Models;
 
@@ -16,6 +17,7 @@ public class WorkExperience
     public required string JobDescription { get; set; }
     
     public long PersonId { get; set; }
-    public required Person Person { get; set; }
+    [JsonIgnore]
+    public Person? Person { get; set; }
 
 }

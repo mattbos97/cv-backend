@@ -16,23 +16,22 @@ public class CVContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        DefinePersonWorkExperienceRelationship(modelBuilder);
-
-        DefinePersonSkillRelationship(modelBuilder);
+        DefineWorkExperienceModel(modelBuilder);
+        DefinePersonSkillModel(modelBuilder);
         
         base.OnModelCreating(modelBuilder);
     }
 
-    private static void DefinePersonWorkExperienceRelationship(ModelBuilder modelBuilder)
+    private static void DefineWorkExperienceModel(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Person>()
-            .HasMany<WorkExperience>(person => person.WorkExperiences)
-            .WithOne(experience => experience.Person)
-            .HasForeignKey(experience => experience.PersonId)
+        modelBuilder.Entity<WorkExperience>()
+            .HasOne<Person>(w => w.Person)
+            .WithMany(p => p.WorkExperiences)
+            .HasForeignKey(w => w.PersonId)
             .IsRequired();
     }
 
-    private void DefinePersonSkillRelationship(ModelBuilder modelBuilder)
+    private void DefinePersonSkillModel(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<PersonSkill>()
             .HasKey(ps => new { ps.PersonId, ps.SkillId });
