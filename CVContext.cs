@@ -11,6 +11,7 @@ public class CVContext : DbContext
 
     public DbSet<Person> Persons { get; set; }
     public DbSet<WorkExperience> WorkExperiences { get; set; }
+    public DbSet<Skill> Skills { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,7 +48,5 @@ public class CVContext : DbContext
             .HasForeignKey(ps => ps.SkillId)
             .IsRequired();
     }
-
-public DbSet<cv_backend.Models.Skill> Skill { get; set; } = default!;
 
 }

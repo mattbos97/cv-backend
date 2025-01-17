@@ -25,14 +25,14 @@ namespace cv_backend.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Skill>>> GetPersonSkill()
         {
-            return await _context.Skill.ToListAsync();
+            return await _context.Skills.ToListAsync();
         }
 
         // GET: api/PersonSkill/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Skill>> GetPersonSkill(long id)
         {
-            var skill = await _context.Skill.FindAsync(id);
+            var skill = await _context.Skills.FindAsync(id);
 
             if (skill == null)
             {
@@ -78,7 +78,7 @@ namespace cv_backend.Controllers
         [HttpPost]
         public async Task<ActionResult<Skill>> PostPersonSkill(Skill skill)
         {
-            _context.Skill.Add(skill);
+            _context.Skills.Add(skill);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPersonSkill", new { id = skill.Id }, skill);
@@ -88,13 +88,13 @@ namespace cv_backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePersonSkill(long id)
         {
-            var skill = await _context.Skill.FindAsync(id);
+            var skill = await _context.Skills.FindAsync(id);
             if (skill == null)
             {
                 return NotFound();
             }
 
-            _context.Skill.Remove(skill);
+            _context.Skills.Remove(skill);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace cv_backend.Controllers
 
         private bool PersonSkillExists(long id)
         {
-            return _context.Skill.Any(e => e.Id == id);
+            return _context.Skills.Any(e => e.Id == id);
         }
     }
 }
