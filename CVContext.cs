@@ -1,4 +1,4 @@
-﻿using cv_backend.Models;
+using cv_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace cv_backend;
@@ -47,5 +47,7 @@ public class CVContext : DbContext
             .HasForeignKey(ps => ps.SkillId)
             .IsRequired();
     }
+
+public DbSet<cv_backend.Models.Skill> Skill { get; set; } = default!;
 
 }
