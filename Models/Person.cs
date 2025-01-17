@@ -14,6 +14,6 @@ public class Person
     public required string Bio { get; set; }
     
     public ICollection<WorkExperience> WorkExperiences { get; set; } = [];
-    public ICollection<Person_Skill> PersonSkills { get; set; } = [];
+    public ICollection<PersonSkill> PersonSkills { get; set; } = [];
 
 }

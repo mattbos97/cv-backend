@@ -9,6 +9,6 @@ public class Skill
     [MaxLength(50)]
     public required string Name { get; set; }
 
-    public ICollection<Person_Skill> PersonSkills { get; set; } = [];
+    public ICollection<PersonSkill> PersonSkills { get; set; } = [];
 
 }
